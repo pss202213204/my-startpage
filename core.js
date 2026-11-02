@@ -34,7 +34,7 @@
     return out;
   }
   function validateBackup(data){
-    if(data?.version!==1||!Array.isArray(data.spaces)||!data.spaces.length||data.spaces.length>20)throw Error('지원하는 모아 백업 파일이 아닙니다.');
+    if(data?.version!==1||!Array.isArray(data.spaces)||!data.spaces.length||data.spaces.length>20)throw Error('지원하는 내 시작페이지 백업 파일이 아닙니다.');
     const spaces=data.spaces.map(validateSpace),index=data.spaces.findIndex(s=>s.id===data.activeId),settings=data.settings||{};
     if(settings.background&&(!/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(settings.background)||settings.background.length>2100000))throw Error('배경 이미지 형식이 올바르지 않습니다.');
     return {version:1,activeId:spaces[Math.max(0,index)].id,spaces,settings:{theme:['cream','sage','lavender','night'].includes(settings.theme)?settings.theme:'cream',background:settings.background||'',autoSwitch:settings.autoSwitch===true,focusMinutes:[15,25,50].includes(settings.focusMinutes)?settings.focusMinutes:25},timer:null};
