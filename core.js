@@ -50,6 +50,15 @@
     }
     t.remaining=Math.max(0,t.endsAt-now);if(!t.remaining){t.status='done';return true;}return false;
   }
-  const api={uid,dayKey,safeUrl,blankSpace,initial,validateSpace,validateBackup,inRange,scheduledSpace,settleTimer};
-  root.Moa=api;if(typeof module!=='undefined')module.exports=api;
+  function loadStored(storage,key){
+    const existing=storage.getItem(key);if(existing!==null)return existing;
+    const candidates=[];
+    for(let i=0;i<storage.length;i++){const k=storage.key(i);if(k!==key&&k.endsWith(".workspace.v1")){try{const raw=storage.getItem(k);validateBackup(JSON.parse(raw));candidates.push({key:k,raw});}catch{}}}
+    if(candidates.length!==1)return null;
+    const previous=candidates[0];
+    try{storage.setItem(key,previous.raw);storage.removeItem(previous.key);}catch{}
+    return previous.raw;
+  }
+  const api={loadStored,uid,dayKey,safeUrl,blankSpace,initial,validateSpace,validateBackup,inRange,scheduledSpace,settleTimer};
+  root.Startpage=api;if(typeof module!=='undefined')module.exports=api;
 })(globalThis);
