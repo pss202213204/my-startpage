@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#172c40"><meta name="description" content="링크, 할 일, 메모를 나만의 공간에. 시작페이지와 함께 만드는 정돈된 하루.">
+  <title>내 시작페이지 · 눈 내리는 겨울</title>
+  <meta property="og:title" content="내 시작페이지 · 눈 내리는 겨울"><meta property="og:description" content="공간별 링크, 할 일, 메모를 관리하는 나만의 시작페이지.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23dc6944'/%3E%3Ctext x='32' y='46' font-size='48' text-anchor='middle' fill='white'%3E✳%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="themes.css"><link rel="stylesheet" href="seasons.css"><script src="core.js" defer></script><script src="app.js" defer></script>
+</head>
+<body data-theme="snow" data-entry-theme="snow">
+<a class="skip" href="#main">본문으로 이동</a>
+<aside class="sidebar">
+  <a class="brand temporary-brand" href="#" aria-label="내 시작페이지 홈"><span class="brand-mark">✳</span> 내 시작페이지<span class="brand-dot">.</span></a>
+  <p class="brand-sub">나의 하루가 모이는 곳</p>
+  <div class="nav-label">MY SPACES <span id="spaceCount">03</span></div>
+  <nav id="spaces" aria-label="내 공간"></nav>
+  <button class="new-space" data-action="new-space"><span>＋</span> 새 공간 만들기</button>
+  <div class="sidebar-bottom">
+    <div class="small-tip"><span>✧</span><p>흩어진 생각도, 할 일도.<br>내게 맞는 공간에 정리해두세요.</p></div>
+    <button data-action="templates"><span>▦</span> 공간 템플릿 <small>NEW</small></button>
+    <button data-action="settings"><span>⚙</span> 설정 및 꾸미기</button>
+    <div class="profile"><span class="avatar">S</span><div><strong>나만의 워크스페이스</strong><small id="saveState">이 브라우저에 자동 저장</small></div><span class="status-dot"></span></div>
+  </div>
+</aside>
+<main id="main">
+  <header class="topbar"><button class="retro-start" data-action="settings" aria-label="시작 메뉴: 설정 열기">▦ 시작</button><div class="breadcrumb">내 워크스페이스 <span>/</span> <strong id="breadcrumb">공부</strong></div><div class="topbar-actions"><span id="liveClock"></span><button class="icon-btn" data-action="help" aria-label="도움말">?</button></div></header>
+  <div class="page">
+    <section class="welcome"><div><div class="eyebrow"><span class="sun">☀</span> <span id="dateText"></span></div><h1>오늘도, 나의 속도로<span>.</span></h1><p>작은 할 일부터 차근차근. 나만의 하루를 만들어봐요.</p></div><button class="outline-btn" data-action="settings"><span>◐</span> 내 공간 꾸미기</button></section>
+    <section class="quote-banner"><div class="quote-mark">“</div><p id="quoteText"></p><button class="icon-btn" data-action="quote" aria-label="좌우명 수정">✎</button></section>
+    <div class="dashboard">
+      <div class="main-column">
+        <section class="links-section"><div class="section-head"><h2>자주 가는 곳 <span id="linkCount"></span></h2><button class="text-btn" data-action="new-link">＋ 바로가기 추가</button></div><div id="links" class="links-grid"></div></section>
+        <section class="card todo-section"><div class="section-head"><h2>오늘의 할 일 <span id="todoCount"></span></h2><div class="todo-tabs" role="group" aria-label="할 일 필터"><button data-filter="all" class="selected">전체</button><button data-filter="open">진행 중</button><button data-filter="done">완료</button></div></div><div class="progress-track"><div id="todoProgress"></div></div><div id="todos"></div><form id="todoForm" class="todo-add"><span>＋</span><input id="todoInput" aria-label="새 할 일" placeholder="새로운 할 일을 적어보세요" maxlength="200" required autocomplete="off"><button type="submit">추가</button></form><div class="todo-footer"><span id="todoSummary"></span><button class="muted-btn" data-action="clear-done">완료 항목 정리</button></div></section>
+        <section class="notes-section"><div class="section-head"><h2>생각 한 조각 <span class="handwritten">잊기 전에, 가볍게</span></h2><button class="text-btn" data-action="new-note">＋ 메모 추가</button></div><div id="notes" class="notes-grid"></div></section>
+      </div>
+      <div class="side-column">
+        <section class="focus-card"><div class="focus-top"><span><span class="pulse-dot"></span> FOCUS TIME</span><button class="dark-icon" data-action="focus-options" aria-label="집중 시간 설정">⋯</button></div><h2>지금, 하나에만 집중해요.</h2><p>잠깐의 몰입이 쌓여 큰 변화를 만들어요.</p><div class="timer-ring"><svg viewBox="0 0 200 200" aria-hidden="true"><circle class="ring-track" cx="100" cy="100" r="88"/><circle id="timerArc" cx="100" cy="100" r="88"/></svg><div><strong id="timerText">25:00</strong><span id="timerLabel">나를 위한 집중 시간</span></div></div><div class="timer-actions"><button id="timerStart" data-action="timer-toggle">▶ 집중 시작</button><button class="timer-reset" data-action="timer-reset" aria-label="타이머 초기화">↺</button></div><div class="focus-footer"><span>오늘 쌓은 집중</span><strong id="focusTotal">0분</strong></div></section>
+        <section class="card calendar-card"><div class="calendar-head"><h2 id="calendarTitle"></h2><div><button class="icon-btn" data-action="month-prev" aria-label="이전 달">‹</button><button class="icon-btn" data-action="month-next" aria-label="다음 달">›</button></div></div><div class="weekdays"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div id="calendar" class="calendar-grid"></div><div class="calendar-bottom"><span class="tiny-dot"></span><span id="calendarCaption">오늘도 좋은 하루 보내세요</span><button class="muted-btn" data-action="month-today">오늘</button></div></section>
+        <div class="space-caption"><span>✦</span> 이 공간은 오직 당신의 취향으로.</div>
+      </div>
+    </div>
+    <footer class="page-footer"><span>MAKE ROOM FOR YOUR DAY.</span><span>조금 더 나다운 하루, 내 시작페이지 <span class="orange">✳</span></span></footer>
+  </div>
+</main>
+<dialog id="modal"><div class="modal-head"><h2 id="modalTitle"></h2><button class="icon-btn" id="closeModal" aria-label="닫기">×</button></div><div id="modalBody"></div></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="backupInput" accept="application/json,.json" hidden><input type="file" id="templateInput" accept="application/json,.json" hidden>
+</body></html>

@@ -18,7 +18,7 @@
     study.notes=[{id:uid(),text:'완벽하게 하려고 기다리지 말고,\n일단 작게 시작해 보기. ☺',color:'yellow'},{id:uid(),text:'이번 주 목표\n\n• 매일 25분 집중하기\n• 배운 내용 한 줄로 남기기',color:'pink'}];
     const daily=blankSpace('일상','☀');daily.links=[{id:uid(),title:'YouTube',description:'좋아하는 영상과 음악',url:'https://www.youtube.com/',letter:'Y',color:'peach'}];
     const career=blankSpace('취업 준비','▣');career.links=[{id:uid(),title:'원티드',description:'나에게 맞는 기회 찾기',url:'https://www.wanted.co.kr/',letter:'W',color:'blue'}];
-    return {version:1,activeId:study.id,spaces:[study,daily,career],settings:{theme:'cream',background:'',autoSwitch:false,focusMinutes:25},timer:null};
+    return {version:1,activeId:study.id,spaces:[study,daily,career],settings:{theme:'cream',background:'',autoSwitch:false,focusMinutes:25,snowMotion:true},timer:null};
   }
   function bounded(v,max,label){if(typeof v!=='string'||v.length>max)throw Error(label+' 형식이 올바르지 않습니다.');return v;}
   function validateSpace(s){
@@ -37,7 +37,7 @@
     if(data?.version!==1||!Array.isArray(data.spaces)||!data.spaces.length||data.spaces.length>20)throw Error('지원하는 내 시작페이지 백업 파일이 아닙니다.');
     const spaces=data.spaces.map(validateSpace),index=data.spaces.findIndex(s=>s.id===data.activeId),settings=data.settings||{};
     if(settings.background&&(!/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(settings.background)||settings.background.length>2100000))throw Error('배경 이미지 형식이 올바르지 않습니다.');
-    return {version:1,activeId:spaces[Math.max(0,index)].id,spaces,settings:{theme:['cream','sage','lavender','night'].includes(settings.theme)?settings.theme:'cream',background:settings.background||'',autoSwitch:settings.autoSwitch===true,focusMinutes:[15,25,50].includes(settings.focusMinutes)?settings.focusMinutes:25},timer:null};
+    return {version:1,activeId:spaces[Math.max(0,index)].id,spaces,settings:{theme:['cream','sage','lavender','night','gaming','retro','cork','snow'].includes(settings.theme)?settings.theme:'cream',background:settings.background||'',snowMotion:settings.snowMotion!==false,autoSwitch:settings.autoSwitch===true,focusMinutes:[15,25,50].includes(settings.focusMinutes)?settings.focusMinutes:25},timer:null};
   }
   function inRange(time,start,end){return start<end?time>=start&&time<end:time>=start||time<end;}
   function scheduledSpace(spaces,date){const time=String(date.getHours()).padStart(2,'0')+':'+String(date.getMinutes()).padStart(2,'0');return spaces.find(s=>s.schedule&&inRange(time,s.schedule.start,s.schedule.end));}
